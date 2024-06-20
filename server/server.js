@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+require("dotenv").config();
+const mongoURI = process.env.MONGO_URI;
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -11,13 +12,10 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    "mongodb+srv://admin:HQ28Gv9dpZcxzEDW@cluster0.ogsmtpp.mongodb.net/UIlibraryDB",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
